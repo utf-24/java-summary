@@ -1,4 +1,4 @@
-package com.yzy.demo.pattern.adaptor;
+package com.yzy.demo.pattern.structural.adaptor;
 
 /**
  * @author young
