@@ -1,6 +1,4 @@
-package com.yzy.demo.pattern.Builder;
-
-import com.yzy.demo.pattern.adaptor.MediaPlayer;
+package com.yzy.demo.pattern.builder;
 
 /**
  * @author young

@@ -1,4 +1,4 @@
-package com.yzy.demo.pattern.Builder;
+package com.yzy.demo.pattern.builder;
 
 import java.util.ArrayList;
 import java.util.Collections;
