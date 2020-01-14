@@ -1,4 +1,4 @@
-package com.yzy.demo.jvm.classLoad;
+package com.yzy.demo.jvm.classload;
 
 /**
  * @author young
