@@ -1,4 +1,6 @@
-package com.yzy.demo.pattern.creational.simple;
+package com.yzy.demo.pattern.creational.factory.simple;
+
+import com.yzy.demo.pattern.creational.Pizza;
 
 /**
  * @author young
@@ -16,10 +18,5 @@ public class PizzaStore {
         System.out.println("pizz is ready: "+ pizza.getName());
 
         return pizza;
-    }
-
-    public static void main(String[] args) {
-        PizzaStore store = new PizzaStore();
-        store.orderPizza("beef");
     }
 }

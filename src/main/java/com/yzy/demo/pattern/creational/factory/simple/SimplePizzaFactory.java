@@ -1,4 +1,6 @@
-package com.yzy.demo.pattern.creational.simple;
+package com.yzy.demo.pattern.creational.factory.simple;
+
+import com.yzy.demo.pattern.creational.Pizza;
 
 /**
  * 简单工厂，把客户端行为和对象创建过程分开
