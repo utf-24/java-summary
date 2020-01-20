@@ -1,4 +1,4 @@
-package com.yzy.demo.concurrent;
+package com.yzy.demo.concurrent.tool;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;

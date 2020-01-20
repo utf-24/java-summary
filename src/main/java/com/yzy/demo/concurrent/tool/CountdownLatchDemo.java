@@ -1,4 +1,4 @@
-package com.yzy.demo.concurrent.thread;
+package com.yzy.demo.concurrent.tool;
 
 import com.yzy.demo.util.SleepUtils;
 
