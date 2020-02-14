@@ -1,6 +1,8 @@
 package com.yzy.demo.jvm.gc;
 
 /**
+ * -XX:+PrintGC
+ *
  * @author young
  * @date 2019/6/6 16:03
  */
@@ -16,8 +18,8 @@ public class ReferenceCountingGC {
         objectB.instance = objectA;
         objectA = null;
         objectB = null;
-
         System.gc();
+
     }
     public static void main(String[] args) {
         testGC();
