@@ -5,7 +5,7 @@ package com.yzy.demo.base;
  * @author young
  * @date 2020/3/11 21:50
  */
-public class TestStrring {
+public class TestString {
     public static void main(String[] args) {
         String s1 = new String("Java");
         String s2 = s1.intern();
