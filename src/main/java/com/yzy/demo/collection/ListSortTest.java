@@ -29,11 +29,18 @@ public class ListSortTest {
         user3.setAge(19);
         user3.setScore(89);
         list.add(user3);
+        User user4 = new User();
+        user4.setTime(null);
+        user4.setAge(11);
+        user4.setScore(33);
+        list.add(user4);
         for(User u:list){
             System.out.println(u.getTime());
         }
         System.out.println("-----------");
-        List<User> listSort = list.stream().sorted(Comparator.comparing(User::getTime)).collect(Collectors.toList());
+        // 如果比较对象为空会抛出NPE，需要重写Comparator接口吧
+        List<User> listSort = list.stream().sorted(Comparator.comparing(User::getTime))
+                .collect(Collectors.toList());
         for(User u:listSort){
             System.out.println(u.getTime());
         }
