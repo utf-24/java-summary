@@ -1,8 +1,6 @@
 package com.yzy.demo.collection;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -12,6 +10,7 @@ import java.util.stream.Collectors;
  * @date 2020/3/27 15:53
  */
 public class ListSortTest {
+
     public static void main(String[] args) {
         List<User> list = new ArrayList<User>();
         User user1 = new User();
@@ -30,19 +29,45 @@ public class ListSortTest {
         user3.setScore(89);
         list.add(user3);
         User user4 = new User();
-        user4.setTime(null);
+        user4.setTime("2020-03-26 10:13:07.914000");
         user4.setAge(11);
         user4.setScore(33);
         list.add(user4);
+
+        User user5 = new User();
+        user5.setTime("2020-03-26 10:13:07.914001");
+        user5.setAge(11);
+        user5.setScore(33);
+        list.add(user5);
+
+        User user6 = new User();
+        user6.setTime("2020-03-26 10:13:07.914000");
+        user6.setAge(11);
+        user6.setScore(33);
+        list.add(user6);
+
+        User user7 = new User();
+        user7.setTime("2020-03-26 10:13:07.914001");
+        user7.setAge(11);
+        user7.setScore(33);
+        list.add(user7);
+
         for(User u:list){
             System.out.println(u.getTime());
         }
         System.out.println("-----------");
-        // 如果比较对象为空会抛出NPE，需要重写Comparator接口吧
+        //根据时间排序 如果比较对象为空会抛出NPE，需要重写Comparator接口吧
         List<User> listSort = list.stream().sorted(Comparator.comparing(User::getTime))
                 .collect(Collectors.toList());
         for(User u:listSort){
             System.out.println(u.getTime());
         }
+
+        // 根据时间排序，并删除时间相同的重复数据
+        ArrayList<User> resultList = list.stream().collect(Collectors.collectingAndThen(
+                Collectors.toCollection(() -> new TreeSet<>(
+                        Comparator.comparing(User::getTime))), ArrayList::new));
+
+        System.out.println(resultList);
     }
 }
