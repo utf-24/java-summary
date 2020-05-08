@@ -1,8 +1,5 @@
 package com.yzy.demo.jvm.ref;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
-import java.util.HashMap;
 import java.util.WeakHashMap;
 
 /**

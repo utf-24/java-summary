@@ -1,10 +1,8 @@
 package com.yzy.demo.pattern.creational.factory.method;
 
-import com.yzy.demo.pattern.creational.factory.LAPizzaStoreImpl;
-import com.yzy.demo.pattern.creational.factory.NYPizzaStoreImpl;
-
 /**
  * 工厂方法测试
+ * 符合开闭原则
  *
  * @author young
  * @date 2020/1/18 1:27

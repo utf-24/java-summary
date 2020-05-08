@@ -1,6 +1,6 @@
 package com.yzy.demo.pattern.creational.factory.simple;
 
-import com.yzy.demo.pattern.creational.Pizza;
+import com.yzy.demo.pattern.creational.factory.method.Pizza;
 
 /**
  * @author young

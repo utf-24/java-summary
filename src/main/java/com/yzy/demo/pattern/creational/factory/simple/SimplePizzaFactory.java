@@ -1,9 +1,10 @@
 package com.yzy.demo.pattern.creational.factory.simple;
 
-import com.yzy.demo.pattern.creational.Pizza;
+import com.yzy.demo.pattern.creational.factory.method.Pizza;
 
 /**
  * 简单工厂，把客户端行为和对象创建过程分开
+ * 缺点：不符合开闭原则
  * @author young
  * @date 2020/1/17 23:05
  */
