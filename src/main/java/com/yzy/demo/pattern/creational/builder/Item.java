@@ -1,4 +1,4 @@
-package com.yzy.demo.pattern.builder;
+package com.yzy.demo.pattern.creational.builder;
 
 /**
  * 商品接口
