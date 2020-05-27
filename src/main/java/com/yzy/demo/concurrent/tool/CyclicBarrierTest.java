@@ -4,6 +4,14 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 /**
+ * 结果分析：
+ * main 3
+ * Thread-0 1
+ * main 2
+ * 主线程先到达了barrier，因为其他线程还没到barrier，所以触发了barrierAction，输出main 3，
+ * thread-0 随后调用await方法，barrier打开，所有线程终止阻塞状态，分别执行后续操作：thread-0
+ * 线程输出 thread-0 1 ， main线程输出 main 2
+ *
  * @author young
  * @date 2019/9/27 16:53
  */
