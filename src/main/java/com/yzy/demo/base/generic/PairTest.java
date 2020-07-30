@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * @author yangzyh
  * @date 2020/7/4 10:29
  */
-public class PairTest {
+public class PairTest<E> {
     static class ArrayAlg {
         static<T extends Comparable> Pair<T> minmax(T[] a) {
             if((null == a || (a.length == 0))) {
