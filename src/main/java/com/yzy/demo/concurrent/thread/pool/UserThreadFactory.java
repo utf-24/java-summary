@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class UserThreadFactory implements ThreadFactory {
 
     private final String namePrefix;
-    private final AtomicInteger nextId = new AtomicInteger(1);
+    private final AtomicInteger nextId = new AtomicInteger(0);
 
     /**
      * 定义线程组名称
