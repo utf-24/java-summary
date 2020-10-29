@@ -65,33 +65,35 @@ public class ReentrantDistributedLock {
     }
 
     public static void main(String[] args) {
-        //Jedis jedis = new Jedis("192.168.99.100", 6379);
-        //jedis.connect();
-        //ReentrantDistributedLock lock = new ReentrantDistributedLock(jedis);
-        //System.out.println("lock: " + lock.lock("demo"));
-        //System.out.println("unlock: " + lock.unlock("demo"));
-        ExecutorService executorService = Executors.newFixedThreadPool(5, new UserThreadFactory("distributed_lock"));
-        List<Future> results = new ArrayList<>();
-        for(int i = 0 ; i < 5; i++) {
-            Future result = executorService.submit(()->{
-                Jedis jedis = new Jedis("192.168.99.100", 6379);
-                jedis.connect();
-                ReentrantDistributedLock lock = new ReentrantDistributedLock(jedis);
-                System.out.println(Thread.currentThread() +"try lock: " + lock.lock("young"));
-                System.out.println(Thread.currentThread() +"try unlock: " + lock.unlock("young"));
-            });
-            results.add(result);
-        }
-        results.forEach(result->{
-            try {
-                result.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        });
-
-        System.out.println("finished");
+        Jedis jedis = new Jedis("192.168.99.100", 6379);
+        jedis.connect();
+        ReentrantDistributedLock lock = new ReentrantDistributedLock(jedis);
+        System.out.println("lock: " + lock.lock("demo"));
+        System.out.println("lock: " + lock.lock("demo"));
+        System.out.println("unlock: " + lock.unlock("demo"));
+        System.out.println("unlock: " + lock.unlock("demo"));
+        //ExecutorService executorService = Executors.newFixedThreadPool(5, new UserThreadFactory("distributed_lock"));
+        //List<Future> results = new ArrayList<>();
+        //for(int i = 0 ; i < 5; i++) {
+        //    Future result = executorService.submit(()->{
+        //        Jedis jedis = new Jedis("192.168.99.100", 6379);
+        //        jedis.connect();
+        //        ReentrantDistributedLock lock = new ReentrantDistributedLock(jedis);
+        //        System.out.println(Thread.currentThread() +"try lock: " + lock.lock("young"));
+        //        System.out.println(Thread.currentThread() +"try unlock: " + lock.unlock("young"));
+        //    });
+        //    results.add(result);
+        //}
+        //results.forEach(result->{
+        //    try {
+        //        result.get();
+        //    } catch (InterruptedException e) {
+        //        e.printStackTrace();
+        //    } catch (ExecutionException e) {
+        //        e.printStackTrace();
+        //    }
+        //});
+        //
+        //System.out.println("finished");
     }
 }
