@@ -1,8 +1,10 @@
 package com.yzy.demo.algorithm;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.math.RandomUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,6 +44,33 @@ public class FindNum {
             throw new IllegalArgumentException("数组中没有一个元素的个数超过其他元素个数之和");
         }
         return result;
+    }
+
+    /**
+     * 剑指offer 40. 找到数组中最小的k个数
+     * 时间复杂度： O(n)
+     * @param array
+     * @param  k   最小的k个数
+     * @return
+     */
+    private static int[] getLeastNumbers(int[] array, int k) {
+        if(array == null || array.length == 0) {
+            throw new IllegalArgumentException("不正确的数组");
+        }
+        if(array.length == 1) return array;
+        int start = 0, end = array.length-1;
+        int index = portion(array, start, end);
+        while (index != k) {
+            if(index < k) {
+                start = index + 1;
+            } else {
+                end = index - 1;
+            }
+            if(start == end) break;
+            index = portion(array, start, end);
+        }
+
+        return ArrayUtils.subarray(array, 0, index);
     }
 
     private static boolean checkIsValidArray(int[] array, int value) {
@@ -88,13 +117,24 @@ public class FindNum {
     }
 
     public static void main(String[] args) {
-        System.out.println("please enter some number to test findMoreThanHalfNum().(enter q to quit)");
+        //System.out.println("please enter some number to test findMoreThanHalfNum().(enter q to quit)");
+        //Scanner scanner = new Scanner(System.in);
+        //List<Integer> sourceList = new ArrayList<>();
+        //while (scanner.hasNextInt()) {
+        //    sourceList.add(scanner.nextInt());
+        //}
+        //int[] array = sourceList.stream().mapToInt(Integer::intValue).toArray();
+        //System.out.println(findMoreThanHalfNum(array) +"'s count is bigger than the rest of the elements in the array");
+
+
+        System.out.println("please enter some number to test getLeastNumbers().(enter q to quit)");
         Scanner scanner = new Scanner(System.in);
         List<Integer> sourceList = new ArrayList<>();
         while (scanner.hasNextInt()) {
             sourceList.add(scanner.nextInt());
         }
         int[] array = sourceList.stream().mapToInt(Integer::intValue).toArray();
-        System.out.println(findMoreThanHalfNum(array) +"'s count is bigger than the rest of the elements in the array");
+        System.out.println(Arrays.toString(getLeastNumbers(array, 4)) +" are the least numbers in the array");
+
     }
 }
