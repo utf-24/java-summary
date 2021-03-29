@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm;
+package com.yzy.demo.algorithm.sort;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
