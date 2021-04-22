@@ -1,9 +1,6 @@
 package com.yzy.demo.algorithm;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -87,12 +84,49 @@ public class LruDemo<k,v> extends LinkedHashMap<k,v> {
         }
     }
 
-    public static void main(String[] args) {
-        LruDemo lruDemo = new LruDemo(10);
-        for(int i=0; i< 17; i++) {
-            lruDemo.put(i,i);
+    /**
+     * 牛客网lru算法
+     * @param operators
+     * @param k
+     * @return
+     */
+    public int[] LRU (int[][] operators, int k) {
+        List<Integer> result = new ArrayList<>();
+        if(operators== null || operators.length == 0) {
+            return new int[0];
         }
-        lruDemo.get(12);
-        System.out.println(lruDemo);
+        LruDemo lruDemo = new LruDemo(k);
+        for (int i = 0; i < operators.length ; i++) {
+            int[] operator = operators[i];
+            if(operator[0] == 1) {
+                //写缓存
+                lruDemo.put(operator[1], operator[2]);
+            } else if (operator[0] == 2) {
+                // 读缓存
+              int value = (int) Optional.ofNullable(lruDemo.get(operator[1])).orElse(-1);
+              result.add(value);
+            }
+        }
+        int[] resultArray = new int[result.size()];
+        for (int i = 0; i < result.size(); i++) {
+            resultArray[i] = result.get(i);
+        }
+        return  resultArray;
+    }
+    public static void main(String[] args) {
+        int[][] operators ={{1,1,1},{1,2,2},{1,3,2},{2,1},{1,4,4},{2,2}};
+        int k = 3;
+        LruDemo lruDemo = new LruDemo(10);
+        int[] result = lruDemo.LRU(operators, k);
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(result[i]);
+            System.out.print(" ");
+        }
+        //LruDemo lruDemo = new LruDemo(10);
+        //for(int i=0; i< 17; i++) {
+        //    lruDemo.put(i,i);
+        //}
+        //lruDemo.get(8);
+        //System.out.println(lruDemo);
     }
 }
