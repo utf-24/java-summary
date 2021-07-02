@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm;
+package com.yzy.demo.algorithm.offer;
 
 /**
  * 剑指offer 42 最大子数组的和

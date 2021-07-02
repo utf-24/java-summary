@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm;
+package com.yzy.demo.algorithm.offer;
 
 /**
  * 剑指offer 44 求任意第n位对应的数字 e.g. 01234567..., input:7, output:7
