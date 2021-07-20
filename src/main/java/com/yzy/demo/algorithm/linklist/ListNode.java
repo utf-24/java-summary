@@ -1,4 +1,4 @@
-package com.yzy.demo.datastructure.list;
+package com.yzy.demo.algorithm.linklist;
 
 /**
  * 单链表
