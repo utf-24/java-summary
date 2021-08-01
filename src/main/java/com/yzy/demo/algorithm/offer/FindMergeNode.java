@@ -1,6 +1,7 @@
-package com.yzy.demo.algorithm.linklist;
+package com.yzy.demo.algorithm.offer;
 
 /**
+ *  剑指offer52
  * 寻找两个链表的合并节点
  *
  * @author yangzyh
