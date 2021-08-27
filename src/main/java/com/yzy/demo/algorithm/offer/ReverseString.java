@@ -1,6 +1,8 @@
 package com.yzy.demo.algorithm.offer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 剑指offer 58
@@ -10,32 +12,58 @@ import java.util.Arrays;
  */
 public class ReverseString {
 
+    /**
+     * I 书上的解法，变态的测试用例过不了
+     * @param s
+     * @return
+     */
     public String reverseWords(String s) {
+        s = s.trim();
         int begin = 0, end = s.length()-1;
-        char[] chars = s.toCharArray();
+        //char[] chars = s.toCharArray();
+        StringBuilder chars = new StringBuilder(s);
         doReverse(chars, begin, end);
         end = begin;
         while (end < s.length()) {
-            if(chars[end]!=' ' && end != s.length()-1) {
+            if(chars.charAt(begin) == ' ') {
+                begin++;
                 end++;
-            } else if(chars[end] == ' ') {
+            } else if(chars.charAt(end) == ' ' || end == s.length()-1) {
                 doReverse(chars, begin, end-1);
-                end++;
-                begin = end;
+                begin = ++end;
             } else {
-                doReverse(chars, begin, end);
                 end++;
             }
         }
-        return Arrays.toString(chars);
+
+        return chars.toString();
     }
 
-    private void doReverse(char[] src, int begin, int end) {
+    /**
+     * I 聪明的做法
+     * @param s
+     * @return
+     */
+    public String reverseWords2(String s) {
+        s = s.trim(); // 删除首尾空格
+        int j = s.length() - 1, i = j;
+        StringBuilder res = new StringBuilder();
+        while(i >= 0) {
+            while(i >= 0 && s.charAt(i) != ' ') i--; // 搜索首个空格
+            res.append(s.substring(i + 1, j + 1) + " "); // 添加单词
+            while(i >= 0 && s.charAt(i) == ' ') i--; // 跳过单词间空格
+            j = i; // j 指向下个单词的尾字符
+        }
+        return res.toString().trim(); // 转化为字符串并返回
+    }
+
+
+    private void doReverse(StringBuilder src, int begin, int end) {
         while (begin < end) {
-            if (src[begin] != ' ' || src[end] != ' ') {
-                char temp = src[begin];
-                src[begin] = src[end];
-                src[end] = temp;
+            if (src.charAt(begin) != ' ' || src.charAt(end) != ' ') {
+                char temp = src.charAt(begin);
+                src.setCharAt(begin,src.charAt(end));
+                src.setCharAt(end, temp);
             }
             begin++;
             end--;
@@ -43,7 +71,8 @@ public class ReverseString {
     }
 
     public static void main(String[] args) {
-        String s = "the sky is blue";
+        //String s = "a good   example";
+        String s = "   a   b  c d   e  ";
         System.out.println(new ReverseString().reverseWords(s));
     }
 }
