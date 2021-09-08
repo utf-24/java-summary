@@ -55,7 +55,7 @@ public class PartitionUtil {
                     e.printStackTrace();
                 }
             });
-            out.write("partition " + table + "default values (null) tablespace fbpm_mof_default\n");
+            out.write("partition " + table + "null values (null) tablespace fbpm_mof_default\n");
             String createSqlEnd = ") as select * from " + table +"_BACKUP;\n";
             out.write(createSqlEnd);
         }
