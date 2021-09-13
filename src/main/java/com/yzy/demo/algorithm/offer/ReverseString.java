@@ -70,9 +70,24 @@ public class ReverseString {
         }
     }
 
+    /**
+     * II 左旋转字符串
+     * e.g. abcdefg, 2,  cdefgab;
+     * @param s
+     * @param position
+     * @return
+     */
+    private String leftReverse(String s, int position) {
+        String str = s.substring(position);
+        String result = str + s.substring(0,position);
+
+        return result;
+    };
+
     public static void main(String[] args) {
         //String s = "a good   example";
-        String s = "   a   b  c d   e  ";
-        System.out.println(new ReverseString().reverseWords(s));
+        //String s = "   a   b  c d   e  ";
+        //System.out.println(new ReverseString().reverseWords(s));
+        System.out.println(new ReverseString().leftReverse("abcdefg", 2));
     }
 }
