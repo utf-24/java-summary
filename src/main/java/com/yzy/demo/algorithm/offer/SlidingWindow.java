@@ -19,7 +19,7 @@ public class SlidingWindow {
     public int[] maxSlidingWindow(int[] nums, int k) {
         if(nums.length <1) return new int[0];
         //窗口数
-        int res[] = new int[nums.length - k +1];
+        int[] res = new int[nums.length - k +1];
         LinkedList<Integer> queue = new LinkedList<>();
         // 遍历数组中元素，right表示滑动窗口右边界
         for(int right =0; right < nums.length; right++) {
