@@ -1,4 +1,4 @@
-package com.yzy.demo;
+package com.yzy.demo.algorithm;
 
 import java.util.*;
 
