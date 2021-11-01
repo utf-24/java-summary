@@ -9,6 +9,7 @@ public class ReplaceSpace {
     public String replaceSpace(String s) {
         int length = s.length();
         int charIndex = 0;
+        // 空间有点浪费，可以先遍历一遍字符串，统计空格数目，确定新字符串长度：旧长度 + 空格数*2
         char[] charOfs = new char[length*3];
         for (int i = 0; i < s.length(); i++) {
             if(s.charAt(i) == ' ') {
