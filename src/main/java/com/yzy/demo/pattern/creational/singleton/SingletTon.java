@@ -1,6 +1,7 @@
 package com.yzy.demo.pattern.creational.singleton;
 
 /**
+ * 饿汉模式
  * @author young
  * @date 2019/10/15 15:43
  */

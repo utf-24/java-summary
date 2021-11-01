@@ -9,6 +9,14 @@ public class DoubleCheckSingleTon {
 
     private static volatile DoubleCheckSingleTon instance;
 
+    private DoubleCheckSingleTon() {
+        if(instance == null) {
+            instance = this;
+        } else  {
+            // 防止反射生成多个实例
+            throw new IllegalStateException("instance already initialized.");
+        }
+    }
 
     public DoubleCheckSingleTon getSingleTon() {
         if (instance == null) {
