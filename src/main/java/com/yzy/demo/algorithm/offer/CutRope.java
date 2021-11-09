@@ -1,6 +1,5 @@
 package com.yzy.demo.algorithm.offer;
 
-import com.yzy.demo.pattern.creational.prototype.Mage;
 
 /**
  * offer 14
