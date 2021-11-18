@@ -2,7 +2,7 @@ package com.yzy.demo.algorithm;
 
 /**
  * 剑指offer 43
- *
+ * 用21345测试
  * @author yangzyh
  * @date 2021/5/6 22:52
  */
@@ -26,7 +26,7 @@ public class NumberOf1 {
         // 统计1出现在最高位的情况
         int numOfFirstDigits;
         if (first == 1) {
-            //入参数字最高位就是1
+            //入参数字最高位就是1, 如12345， 的到的就是 2345 +1
             numOfFirstDigits = Integer.parseInt(strN.substring(1)) + 1;
         } else {
             //入参数字最高位大于1, 无论是21345，还是31345，1在最高位的情况只有10000-19999，10^n-1
