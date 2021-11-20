@@ -2,7 +2,9 @@ package com.yzy.demo.algorithm.offer;
 
 /**
  * 剑指offer 48
- *
+ * arabcacfr
+ * f(i) = f(i-1) +1 //当第i个字符没出现过，或者是这个字符和上次出现的距离大于当前的最大length
+ * f(i) = d // 当第i个字符和上次出现的距离小于当前最大length
  * @author yangzyh
  * @date 2021/7/4 16:58
  */
