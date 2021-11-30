@@ -1,4 +1,6 @@
-package com.yzy.demo.algorithm.offer;
+package com.yzy.demo.algorithm.dp;
+
+import java.util.Arrays;
 
 /**
  * 剑指offer 48
@@ -21,9 +23,7 @@ public class MaxUniqueSubString {
         //int[] position = new int[26];
         // ascII码所有情况
         int[] position = new int[127];
-        for (int i = 0; i < position.length; i++) {
-            position[i] = -1;
-        }
+        Arrays.fill(position, -1);
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
