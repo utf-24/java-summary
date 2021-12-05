@@ -1,11 +1,11 @@
 package com.yzy.demo.concurrent;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class SemaphoreBoundedBufferTest {
+    private static final int LOCKUP_DETECT_TIMEOUT = 1000;
 
     @Test
     public void testIsEmptyWhenConstructed() {
@@ -21,5 +21,26 @@ public class SemaphoreBoundedBufferTest {
             buffer.put(i);
         }
         assertTrue(buffer.isFull());
+    }
+
+    @Test
+    public void testTakeBlocksWhenEmpty() {
+        final SemaphoreBoundedBuffer<Integer> buffer = new SemaphoreBoundedBuffer<>(10);
+        Thread taker = new Thread(()->{
+            try {
+                buffer.take();
+                fail();
+            } catch (InterruptedException success) {
+            }
+        });
+        try {
+            taker.start();
+            Thread.sleep(LOCKUP_DETECT_TIMEOUT);
+            taker.interrupt();
+            taker.join(LOCKUP_DETECT_TIMEOUT);
+            assertFalse(taker.isAlive());
+        } catch (Exception e) {
+            fail();
+        }
     }
 }
