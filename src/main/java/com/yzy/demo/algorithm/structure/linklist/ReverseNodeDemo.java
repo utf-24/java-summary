@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm.linklist;
+package com.yzy.demo.algorithm.structure.linklist;
 
 import java.util.Stack;
 

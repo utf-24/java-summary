@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm.tree;
+package com.yzy.demo.algorithm.structure.tree;
 
 import java.util.ArrayList;
 import java.util.List;

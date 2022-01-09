@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm.linklist;
+package com.yzy.demo.algorithm.structure.linklist;
 
 /**
  * https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/
