@@ -114,19 +114,19 @@ public class LruDemo<k,v> extends LinkedHashMap<k,v> {
         return  resultArray;
     }
     public static void main(String[] args) {
-        int[][] operators ={{1,1,1},{1,2,2},{1,3,2},{2,1},{1,4,4},{2,2}};
-        int k = 3;
-        LruDemo lruDemo = new LruDemo(10);
-        int[] result = lruDemo.LRU(operators, k);
-        for (int i = 0; i < result.length; i++) {
-            System.out.print(result[i]);
-            System.out.print(" ");
-        }
+        //int[][] operators ={{1,1,1},{1,2,2},{1,3,2},{2,1},{1,4,4},{2,2}};
+        //int k = 3;
         //LruDemo lruDemo = new LruDemo(10);
-        //for(int i=0; i< 17; i++) {
-        //    lruDemo.put(i,i);
+        //int[] result = lruDemo.LRU(operators, k);
+        //for (int i = 0; i < result.length; i++) {
+        //    System.out.print(result[i]);
+        //    System.out.print(" ");
         //}
-        //lruDemo.get(8);
-        //System.out.println(lruDemo);
+        LruDemo lruDemo = new LruDemo(10);
+        for(int i=0; i< 17; i++) {
+            lruDemo.put(i,i);
+        }
+        lruDemo.get(8);
+        System.out.println(lruDemo);
     }
 }
