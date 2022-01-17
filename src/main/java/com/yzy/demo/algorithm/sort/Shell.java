@@ -3,17 +3,25 @@ package com.yzy.demo.algorithm.sort;
 import java.util.Arrays;
 
 /**
- * 适合大部分有序的数组
+ * 每次保证h长度的子数组有序
  * @author yangzyh
- * @date 2022/1/17 15:30
+ * @date 2022/1/17 15:51
  */
-public class Insertion {
+public class Shell {
 
     public static void sort(Comparable[] a) {
-        for (int i = 1; i < a.length; i++) {
-            for (int j = i; j > 0 && less(a[j], a[j-1]); j--) {
-                swap(a,j,j-1);
+        int length = a.length;
+        int h = 1;
+        while (length/3 > h) {
+            h = 3*h + 1;
+        }
+        while (h >= 1 ) {
+            for (int i = h; i < length; i++) {
+                for (int j = i; j >= h && less(a[j], a[j-h]) ; j -= h) {
+                    swap(a, j, j-h);
+                }
             }
+            h = h/3;
         }
     }
 
@@ -28,8 +36,8 @@ public class Insertion {
     }
 
     public static void main(String[] args) {
-        Integer[] a = {3,2,11,1,34,33,22};
-        sort(a);
+        String[] a = {"b","sfd","z","sf","k"};
+        Shell.sort(a);
         System.out.println(Arrays.toString(a));
     }
 }
