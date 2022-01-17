@@ -1,12 +1,5 @@
-package com.yzy.demo.algorithm;
+package com.yzy.demo.algorithm.sort;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.math.RandomUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -15,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author yangzyh
  * @date 2021/3/20 19:36
  */
-public class FindNum {
+public class FindMajorityNum {
     public int majorityElement(int[] nums) {
         if(nums.length ==1) return nums[0];
         int start =0, end = nums.length-1;
@@ -39,7 +32,7 @@ public class FindNum {
      * @param nums
      * @return
      */
-    public int majorityElement2(int[] nums) {
+    public int majorityElement2(int[] nums) { 
         int result = nums[0];
         int times = 1;
         for (int i = 1; i <nums.length ; i++) {
@@ -88,7 +81,7 @@ public class FindNum {
 
     public static void main(String[] args) {
         int[] a = {3,3,4};
-        System.out.println(new FindNum().majorityElement(a));
-        System.out.println(new FindNum().majorityElement2(a));
+        System.out.println(new FindMajorityNum().majorityElement(a));
+        System.out.println(new FindMajorityNum().majorityElement2(a));
     }
 }
