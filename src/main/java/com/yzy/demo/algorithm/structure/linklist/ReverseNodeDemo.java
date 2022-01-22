@@ -9,6 +9,11 @@ import java.util.Stack;
  */
 public class ReverseNodeDemo {
 
+    /**
+     * 空间和时间都浪费了。。
+     * @param head
+     * @return
+     */
     public ListNode reverseList(ListNode head) {
         if( head == null || head.next == null) {
             return head;
