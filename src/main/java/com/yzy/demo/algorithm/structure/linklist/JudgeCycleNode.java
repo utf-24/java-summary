@@ -19,4 +19,36 @@ public class JudgeCycleNode {
 
         return false;
     }
+
+    /**https://leetcode-cn.com/problems/linked-list-cycle-ii/
+     * 公式不好推导啊，快慢指针相遇后，新的指针从头开始，慢指针从相遇节点开始，最终在环入口相遇。
+     * 找到环形链表的入口
+     * @param head
+     * @return
+     */
+    public ListNode detectCycle(ListNode head) {
+        if (head == null) {
+            return  null;
+        }
+        ListNode quick = head;
+        ListNode slow = head;
+        while (quick !=null) {
+            slow = slow.next;
+            if (quick.next != null) {
+                quick = quick.next.next;
+            } else {
+                return null;
+            }
+            if (quick == slow) {
+                ListNode p = head;
+                while (p != slow) {
+                    p = p.next;
+                    slow = slow.next;
+                }
+                return p;
+            }
+        }
+
+        return null;
+    }
 }
