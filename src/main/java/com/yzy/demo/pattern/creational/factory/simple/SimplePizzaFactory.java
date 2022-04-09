@@ -12,6 +12,7 @@ public class SimplePizzaFactory {
 
     /**
      * 建议用static
+     * static好处是client不用实例化，缺点是子类无法拓展创建方法的行为
      *
      * @param type
      * @return
