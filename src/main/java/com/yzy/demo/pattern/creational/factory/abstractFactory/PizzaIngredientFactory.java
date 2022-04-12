@@ -7,8 +7,14 @@ package com.yzy.demo.pattern.creational.factory.abstractFactory;
  */
 public interface PizzaIngredientFactory {
 
+    /**产品族1
+     * @return beef
+     */
     Beef createBeef();
 
+    /**产品族2
+     * @return cheese
+     */
     Cheese createCheese();
 
 }
