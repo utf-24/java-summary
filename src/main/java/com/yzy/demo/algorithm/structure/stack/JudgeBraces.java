@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm;
+package com.yzy.demo.algorithm.structure.stack;
 
 import org.apache.commons.lang.StringUtils;
 
