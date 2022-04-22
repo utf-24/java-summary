@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm;
+package com.yzy.demo.algorithm.sort;
 
 import java.util.HashMap;
 
