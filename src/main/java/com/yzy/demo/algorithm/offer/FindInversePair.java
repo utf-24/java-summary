@@ -21,7 +21,7 @@ public class FindInversePair {
 
     private int inversePairCore(int[] data, int[] copy, int start, int end) {
         if (start == end) {
-            copy[start] = data[start];  //why
+            //copy[start] = data[start];  //why
             return 0;
         }
         int halfLength = (end - start) / 2;
