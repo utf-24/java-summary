@@ -8,7 +8,7 @@ package com.yzy.demo.algorithm.offer;
  */
 public class FindInversePair {
 
-    public int inversePair(int[] data) {
+    public int inversePairs(int[] data) {
         int length = data.length;
         if (length < 1) {
             return 0;
@@ -21,24 +21,23 @@ public class FindInversePair {
 
     private int inversePairCore(int[] data, int[] copy, int start, int end) {
         if (start == end) {
-            copy[start] = data[start];
+            copy[start] = data[start];  //why
             return 0;
         }
-        int length = (end - start) / 2;
-        int left = inversePairCore(copy, data, start, start + length);
-        int right = inversePairCore(copy, data, start + length + 1, end);
+        int halfLength = (end - start) / 2;
+        int left = inversePairCore(copy, data, start, start + halfLength);
+        int right = inversePairCore(copy, data, start + halfLength + 1, end);
 
         // i初始化为前半段最后一个位置
-        int i = start + length;
+        int firstHalfEndIdx = start + halfLength;
+        int i = firstHalfEndIdx;
         // j初始化为后半段最后一个位置
         int j = end;
         int indexCopy = end;
         int count = 0;
-        while (i >= start && j >= start + length
-                + 1) {
+        while (i >= start && j >= start + halfLength + 1) {
             if (data[i] > data[j]) {
-                count += j - start - length
-                ;
+                count += j - firstHalfEndIdx;
                 copy[indexCopy--] = data[i--];
             } else {
                 copy[indexCopy--] = data[j--];
@@ -47,8 +46,7 @@ public class FindInversePair {
         for (; i >= start; i--) {
             copy[indexCopy--] = data[i];
         }
-        for (; j >= start + length
-                + 1; j--) {
+        for (; j >= start + halfLength + 1; j--) {
             copy[indexCopy--] = data[j];
         }
 
@@ -56,7 +54,7 @@ public class FindInversePair {
     }
 
     public static void main(String[] args) {
-        int data[] = {7, 5 ,6, 4};
-        System.out.println(new FindInversePair().inversePair(data));
+        int data[] = {7, 5, 6, 4};
+        System.out.println(new FindInversePair().inversePairs(data));
     }
 }
