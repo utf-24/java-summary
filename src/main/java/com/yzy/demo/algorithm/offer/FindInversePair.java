@@ -1,5 +1,7 @@
 package com.yzy.demo.algorithm.offer;
 
+import java.util.Arrays;
+
 /**
  * 剑指offer 51
  *
@@ -53,8 +55,46 @@ public class FindInversePair {
         return left + right + count;
     }
 
+    int findInversePir(int[] nums) {
+        if (nums.length == 0) return 0;
+        int[] copy = new int[nums.length];
+        System.arraycopy(nums, 0, copy, 0, nums.length);
+        return doFindInversePair(nums, copy, 0, nums.length - 1);
+    }
+
+    public int doFindInversePair(int[] data, int[] copy, int left, int right) {
+        if (left == right) {
+            return 0;
+        }
+        int mid = left + (right - left) / 2;
+        int leftCount = doFindInversePair(copy, data, left, mid);
+        int rightCount = doFindInversePair(copy,data, mid + 1, right);
+        int copyIndex = right;
+        int count = 0;
+        int i = mid, j = right;
+        while (i >= left && j >= mid + 1) {
+            if (data[i] > data[j]) {
+                // 之前的都是逆序对
+                count += (j - mid);
+                copy[copyIndex--] = data[i--];
+            } else {
+                copy[copyIndex--] = data[j--];
+            }
+        }
+        while (i >= left) {
+            copy[copyIndex--] = data[i--];
+        }
+        while (j >= mid + 1) {
+            copy[copyIndex--] = data[j--];
+        }
+        return count + leftCount + rightCount;
+    }
+
     public static void main(String[] args) {
         int data[] = {7, 5, 6, 4};
-        System.out.println(new FindInversePair().inversePairs(data));
+        //int data[] = {};
+        //System.out.println(new FindInversePair().inversePairs(data));
+        System.out.println(new FindInversePair().findInversePir(data));
+        System.out.println(Arrays.toString(data));
     }
 }
