@@ -1,7 +1,5 @@
 package com.yzy.demo.algorithm.search;
 
-import java.util.Arrays;
-
 /**
  * e.g. input: 4,-5,1,-3,2,6,1  output: 9
  * @author yangzyh
@@ -9,9 +7,26 @@ import java.util.Arrays;
  */
 public class FindMaxSubArray {
 
-    int findMaxSubArray(int[] nums) {
+    int findMaxSubArrayDivideAndConquer(int[] nums) {
         int[] result = doFindMaxSubArray(nums, 0, nums.length - 1);
         return  result[2];
+    }
+
+    int finMaxSubArray(int[] nums) {
+        int curSum = Integer.MIN_VALUE;
+        int maxSum = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if (curSum > 0) {
+                curSum += nums[i];
+            } else {
+                curSum = nums[i];
+            }
+            if (curSum > maxSum) {
+                maxSum = curSum;
+            }
+        }
+
+        return maxSum;
     }
 
     /**
@@ -72,7 +87,9 @@ public class FindMaxSubArray {
     }
 
     public static void main(String[] args) {
-        System.out.println(new FindMaxSubArray().findMaxSubArray(new int[]{4, -5, 1, -3, 2, 6, 1}));
-        System.out.println(new FindMaxSubArray().findMaxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+        System.out.println(new FindMaxSubArray().findMaxSubArrayDivideAndConquer(new int[]{4, -5, 1, -3, 2, 6, 1}));
+        System.out.println(new FindMaxSubArray().finMaxSubArray(new int[]{4, -5, 1, -3, 2, 6, 1}));
+        System.out.println(new FindMaxSubArray().findMaxSubArrayDivideAndConquer(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+        System.out.println(new FindMaxSubArray().finMaxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
     }
 }
