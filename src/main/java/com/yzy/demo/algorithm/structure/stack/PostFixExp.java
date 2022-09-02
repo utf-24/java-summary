@@ -42,6 +42,58 @@ public class PostFixExp {
     }
 
     /**
+     * https://leetcode.cn/problems/evaluate-reverse-polish-notation/
+     * 输入：tokens = ["2","1","+","3","*"]
+     * 输出：9
+     * 解释：该算式转化为常见的中缀算术表达式为：((2 + 1) * 3) = 9
+     * @param tokens
+     * @return
+     */
+    public int evalRPN(String[] tokens) {
+        Stack<String> tempStack = new Stack<>();
+        for (String s: tokens) {
+            if (isOperator(s)) {
+                // assume expression is legal, so before pop,tempStack must have num elements
+                String numRight = tempStack.pop();
+                String numLeft = tempStack.pop();
+                String result = calculate(numLeft, numRight, s);
+                tempStack.push(result);
+            } else {
+                tempStack.push(s);
+            }
+        }
+        return Integer.parseInt(tempStack.pop());
+    }
+
+    private String calculate(String numLeft, String numRight, String operator) {
+        int intNumLeft = Integer.parseInt(numLeft);
+        int intNumRight = Integer.parseInt(numRight);
+        int result;
+        switch(operator) {
+            case "+":
+                result = intNumLeft + intNumRight;
+                break;
+            case "-":
+                result = intNumLeft - intNumRight;
+                break;
+            case "*":
+                result = intNumLeft * intNumRight;
+                break;
+            case "/":
+                result = intNumLeft / intNumRight;
+                break;
+            default:
+                result = 0;
+                //throw new IllegalArgumentException("illegal operator " + operator);
+        }
+        return String.valueOf(result);
+    }
+
+    private boolean isOperator(String s) {
+        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/");
+    }
+
+    /**
      * judge whether it should push c into operatorStack or not.
      * such case should not push:
      * when c is ')'.
@@ -77,5 +129,6 @@ public class PostFixExp {
 
     public static void main(String[] args) {
         System.out.println(new PostFixExp().convertToPostFixExp("a+b*c+(d*e+f)*g"));
+        System.out.println(new PostFixExp().evalRPN(new String[]{"2", "1", "+", "3", "*"}));
     }
 }
