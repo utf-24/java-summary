@@ -19,14 +19,13 @@ public class RemoveDuplicateNode {
         while (after !=null) {
             if (cur.val != after.val) {
                 pre = cur;
-                cur = after;
             } else {
                 while (after !=null && cur.val == after.val) {
                     after = after.next;
                 }
                 pre.next = after;
-                cur =after;
             }
+            cur = after;
             if (after != null) {
                 after = after.next;
             }
