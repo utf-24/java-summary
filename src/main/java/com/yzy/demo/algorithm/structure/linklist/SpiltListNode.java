@@ -1,6 +1,7 @@
 package com.yzy.demo.algorithm.structure.linklist;
 
 /**
+ * https://leetcode.cn/problems/partition-list/
  * lc:86
  * 输入：head = [1,4,3,2,5,2], x = 3
  * 输出：[1,2,2,4,3,5]
