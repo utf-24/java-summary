@@ -2,6 +2,9 @@ package com.yzy.demo.algorithm.structure.linklist;
 
 /**
  * LC 92
+ * https://leetcode.cn/problems/reverse-linked-list-ii/
+ * 输入：head = [1,2,3,4,5], left = 2, right = 4
+ * 输出：[1,4,3,2,5]
  * @author yangzyh
  * @date 2022/4/16 1:06
  */
