@@ -2,7 +2,7 @@ package com.yzy.demo.jvm.gc;
 
 /**
  * 测试对象分配，新生代10m，survivor 8m
- * -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8
+ * -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:+UseSerialGC
  *
  * @author young
  * @date 2020/2/15 17:40
