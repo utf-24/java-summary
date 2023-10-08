@@ -14,6 +14,9 @@ package com.yzy.demo.algorithm;
      int val;
      ListNode next;
      ListNode(int x) { val = x; }
+     ListNode(int x, ListNode next) {
+         val =x; this.next = next;
+     }
  }
 public class ListNodeAdd {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

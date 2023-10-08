@@ -45,6 +45,34 @@ public class RemoveLastNthNode {
             return  head;
         }
     }
+
+    /**
+     * 法2，使用dummy head可以避免删除头节点时特殊处理
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        int length = getSize(head);
+        ListNode cur = dummy;
+        for (int i = 1; i < length - n + 1; ++i) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+        ListNode ans = dummy.next;
+        return ans;
+    }
+
+
+    private int getSize(ListNode head) {
+        int size = 0;
+        while (head != null) {
+            size++;
+            head = head.next;
+        }
+        return size;
+    }
     public static void main(String[] args) {
         ListNode node3 = new ListNode(3,null);
         ListNode node2 = new ListNode(2,node3);

@@ -7,7 +7,7 @@ package com.yzy.demo.algorithm.structure.linklist;
  */
 public class ListNode {
     int val;
-    ListNode next = null;
+    public ListNode next = null;
 
     public ListNode(int val) {
         this.val = val;
