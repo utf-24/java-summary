@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm.structure.hash;
+package com.yzy.demo.algorithm.structure.linklist.hash;
 
 import java.util.ArrayList;
 import java.util.List;

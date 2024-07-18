@@ -1,4 +1,4 @@
-package com.yzy.demo.algorithm.structure.hash;
+package com.yzy.demo.algorithm.structure.linklist.hash;
 
 /**
  * https://leetcode.cn/problems/design-hashmap/submissions/547293975/
