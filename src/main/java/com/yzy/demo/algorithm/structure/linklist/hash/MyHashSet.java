@@ -1,3 +1,5 @@
+package com.yzy.demo.algorithm.structure.linklist.hash;
+
 public class MyHashSet {
     // 由于使用的是「链表」，这个值可以取得很小
     Node[] nodes = new Node[10009];

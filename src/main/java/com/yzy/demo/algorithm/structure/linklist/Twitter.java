@@ -3,117 +3,120 @@ package com.yzy.demo.algorithm.structure.linklist;
 import java.util.*;
 
 /**
- * https://leetcode.cn/problems/design-twitter/solutions/199331/she-ji-tui-te-by-leetcode-solution/
+ * 设计Node对象，包含关注人的list集合，自己发送的推文集合；
+ * 设计 哈希， 用户id -> node ， 推特id-> id时间戳
+ * 维护全局time 时间戳
+ * 获取前10条最新推文，根据每个用户的推文和已有的结果依次比较合并产生新的答案；
  */
-class Twitter {
-    private class Node {
-        // 哈希表存储关注人的 Id
-        Set<Integer> followee;
-        // 用链表存储 tweetId
-        LinkedList<Integer> tweet;
-
-        Node() {
-            followee = new HashSet<Integer>();
-            tweet = new LinkedList<Integer>();
+public class Twitter {
+    private class UserInfo {
+        LinkedList<Integer> tweets;
+        Set<Integer> followees;
+        UserInfo() {
+            tweets = new LinkedList<>();
+            followees = new HashSet<>();
         }
     }
 
-    // getNewsFeed 检索的推文的上限以及 tweetId 的时间戳
-    private int recentMax, time;
-    // tweetId 对应发送的时间
-    private Map<Integer, Integer> tweetTime;
-    // 每个用户存储的信息
-    private Map<Integer, Node> user;
+    /**
+     * userId -> userInfo
+     */
+    Map<Integer, UserInfo> users;
+
+    /**
+     * tweetId -> tweetTime
+     */
+    Map<Integer, Integer> tweetId2Time;
+
+    // 最新条数，时间戳
+    private int recentMax,time;
+
 
     public Twitter() {
-        time = 0;
         recentMax = 10;
-        tweetTime = new HashMap<Integer, Integer>();
-        user = new HashMap<Integer, Node>();
+        users = new HashMap<>();
+        tweetId2Time = new HashMap<>();
     }
 
-    // 初始化
-    public void init(int userId) {
-        user.put(userId, new Node());
+    public void initUser(int userId) {
+        users.put(userId, new UserInfo());
     }
 
     public void postTweet(int userId, int tweetId) {
-        if (!user.containsKey(userId)) {
-            init(userId);
+        if (!users.containsKey(userId)) {
+            initUser(userId);
         }
-        // 达到限制，剔除链表末尾元素
-        if (user.get(userId).tweet.size() == recentMax) {
-            user.get(userId).tweet.remove(recentMax - 1);
+        if (users.get(userId).tweets.size() == recentMax) {
+            users.get(userId).tweets.removeLast();
         }
-        user.get(userId).tweet.addFirst(tweetId);
-        tweetTime.put(tweetId, ++time);
+        users.get(userId).tweets.addFirst(tweetId);
+        tweetId2Time.put(tweetId, ++time);
     }
-    
+
     public List<Integer> getNewsFeed(int userId) {
-        LinkedList<Integer> ans = new LinkedList<Integer>();
-        for (int it : user.getOrDefault(userId, new Node()).tweet) {
-            ans.addLast(it);
-        }
-        for (int followeeId : user.getOrDefault(userId, new Node()).followee) {
-            if (followeeId == userId) { // 可能出现自己关注自己的情况
-                continue;
-            }
-            LinkedList<Integer> res = new LinkedList<Integer>();
-            int tweetSize = user.get(followeeId).tweet.size();
-            Iterator<Integer> it = user.get(followeeId).tweet.iterator();
-            int i = 0;
-            int j = 0;
-            int curr = -1;
-            // 线性归并
-            if (j < tweetSize) {
-                curr = it.next();
-                while (i < ans.size() && j < tweetSize) {
-                    if (tweetTime.get(curr) > tweetTime.get(ans.get(i))) {
-                        res.addLast(curr);
-                        ++j;
-                        if (it.hasNext()) {
-                            curr = it.next();
-                        }
+        UserInfo userInfo = users.getOrDefault(userId, new UserInfo());
+        List<Integer> result = new LinkedList<>(userInfo.tweets);
+        for (int followee : userInfo.followees) {
+            if (followee == userId) continue;
+            List<Integer> followeeTweets = users.get(followee).tweets;
+            List<Integer> tempResult = new LinkedList<>();
+            int rIdx = 0, fIdx = 0, curTweetId = -1;
+            if ( fIdx < followeeTweets.size()) {
+                while (rIdx < result.size() && fIdx < followeeTweets.size()) {
+                    curTweetId = followeeTweets.get(fIdx);
+                    if(tweetId2Time.get(curTweetId) > tweetId2Time.get(result.get(rIdx))) {
+                        tempResult.add(curTweetId);
+                        fIdx++;
                     } else {
-                        res.addLast(ans.get(i));
-                        ++i;
+                        tempResult.add(result.get(rIdx));
+                        rIdx++;
                     }
-                    // 已经找到这两个链表合起来后最近的 recentMax 条推文
-                    if (res.size() == recentMax) {
-                        break;
-                    }
+                    if (tempResult.size() == recentMax) break;
                 }
             }
-            for (; i < ans.size() && res.size() < recentMax; ++i) {
-                res.addLast(ans.get(i));
+            while (fIdx < followeeTweets.size() && tempResult.size() < recentMax) {
+                tempResult.add(followeeTweets.get(fIdx));
+                fIdx++;
             }
-            if (j < tweetSize && res.size() < recentMax) {
-                res.addLast(curr);
-                for (; it.hasNext() && res.size() < recentMax;) {
-                    res.addLast(it.next());
-                }
+            for (; rIdx < result.size() && tempResult.size() < recentMax; rIdx++) {
+                tempResult.add(result.get(rIdx));
             }
-            ans = new LinkedList<Integer>(res);
+
+            result = new LinkedList<>(tempResult);
         }
-        return ans;
+        return result;
     }
-    
+
     public void follow(int followerId, int followeeId) {
-        if (!user.containsKey(followerId)) {
-            init(followerId);
-        }
-        if (!user.containsKey(followeeId)) {
-            init(followeeId);
-        }
-        user.get(followerId).followee.add(followeeId);
+        if (!users.containsKey(followeeId)) initUser(followeeId);
+        if (!users.containsKey(followerId)) initUser(followerId);
+        users.get(followerId).followees.add(followeeId);
     }
-    
+
     public void unfollow(int followerId, int followeeId) {
-        user.getOrDefault(followerId, new Node()).followee.remove(followeeId);
+        users.get(followerId).followees.remove(followeeId);
+    }
+
+    public static void main(String[] args) {
+        Twitter twitter = new Twitter();
+        twitter.postTweet(1, 1);
+        twitter.postTweet(2, 2);
+        twitter.postTweet(3, 3);
+        twitter.postTweet(1, 4);
+        twitter.postTweet(2, 5);
+        twitter.postTweet(3, 6);
+        twitter.postTweet(1, 7);
+        twitter.postTweet(2, 8);
+        twitter.postTweet(3, 9);
+        twitter.postTweet(1, 10);
+        twitter.postTweet(2, 11);
+        twitter.postTweet(3, 12);
+        twitter.follow(1,2);
+        twitter.follow(1,3);
+        System.out.println(twitter.getNewsFeed(1));
+        twitter.unfollow(1, 2);
+        System.out.println(twitter.getNewsFeed(1));
+        twitter.unfollow(1, 3);
+        System.out.println(twitter.getNewsFeed(1));
     }
 }
-
-//作者：力扣官方题解
-//链接：https://leetcode.cn/problems/design-twitter/solutions/199331/she-ji-tui-te-by-leetcode-solution/
-//来源：力扣（LeetCode）
-//著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
