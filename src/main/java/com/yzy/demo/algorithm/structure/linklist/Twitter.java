@@ -3,7 +3,6 @@ package com.yzy.demo.algorithm.structure.linklist;
 import java.util.*;
 
 /**
- * test c
  * 设计Node对象，包含关注人的list集合，自己发送的推文集合；
  * 设计 哈希， 用户id -> node ， 推特id-> id时间戳
  * 维护全局time 时间戳
