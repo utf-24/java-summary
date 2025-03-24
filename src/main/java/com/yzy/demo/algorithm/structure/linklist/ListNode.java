@@ -1,12 +1,14 @@
 package com.yzy.demo.algorithm.structure.linklist;
 
+import com.yzy.demo.algorithm.structure.SpiralMatrix;
+
 /**
  * 单链表
  * @author yangzyh
  * @date 2021/4/12 21:10
  */
 public class ListNode {
-    int val;
+    public int val;
     public ListNode next = null;
 
     public ListNode(int val) {

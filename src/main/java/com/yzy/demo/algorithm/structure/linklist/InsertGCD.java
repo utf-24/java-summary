@@ -1,3 +1,5 @@
+import com.yzy.demo.algorithm.structure.linklist.ListNode;
+
 public class InsertGCD {
     public ListNode insertGreatestCommonDivisors(ListNode head) {
         ListNode node = head;
